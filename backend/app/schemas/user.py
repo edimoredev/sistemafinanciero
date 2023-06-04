@@ -3,7 +3,7 @@ import pydantic as _pydantic
 
 class _UserBase(_pydantic.BaseModel):
     id_card: str
-    mame_user: str
+    name_user: str
 
 
 class UserCreate(_UserBase):

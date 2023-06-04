@@ -26,7 +26,7 @@ class Transaction(_database.Base):
         'TypeTransaction', backref=_orm.backref('transactions', lazy=True))
 
     amount = _sql.Column(_sql.Numeric(20, 2), nullable=False)
-    Date = _sql.Column(_sql.DateTime, default=datetime.datetime.now())
+    date = _sql.Column(_sql.DateTime, default=datetime.datetime.now())
 
     def __str__(self):
         return self.id_cuenta

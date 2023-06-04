@@ -10,11 +10,13 @@ class TypeTransactionController():
 
     def get_all_transactionType(self):
         transaction_type = self._Base.query(TypeTransaction).all()
+        self._Base.close()
         return transaction_type
 
     def get_transactionType(self, name_typo):
         transaction_type = self._Base.query(TypeTransaction).filter(
             TypeTransaction.name_typeTransactions == name_typo).first()
+        self._Base.close()
         return transaction_type
 
     def insert_transactionType(self, transactionType):

@@ -15,8 +15,9 @@ userRouter = APIRouter(prefix="/users",
 
 @userRouter.post("/")
 async def create_user(user: UserCreate):
-    user = UserController().get_user(user.id_card)
-    if user:
+    print(user)
+    idUser = UserController().get_user(user.id_card)
+    if idUser:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail="El usuario ya existe")
     new_user = UserController().insert_user(user)

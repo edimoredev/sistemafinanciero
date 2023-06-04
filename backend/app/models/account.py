@@ -13,12 +13,12 @@ class Account(_database.Base):
     id_account = _sql.Column(_sql.BigInteger, primary_key=True)
 
     id_user = _sql.Column(_sql.String(50), _sql.ForeignKey(
-        "users.id_cedula", ondelete="CASCADE"), nullable=False)
+        "users.id_card", ondelete="CASCADE"), nullable=False)
     user = _orm.relationship(
         'User', backref=_orm.backref('accounts', lazy=True))
 
     name_surname = _sql.Column(_sql.String(50), nullable=False)
-    balance = _sql.Column(_sql.BigInteger)
+    balance = _sql.Column(_sql.BigInteger, default=0)
 
     def __str__(self):
         return self.name_surname
