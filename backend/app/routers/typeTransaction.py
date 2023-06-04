@@ -20,3 +20,12 @@ async def create_transactionType(transactionType: TypeTransactionCreate):
     new_transactionType = TypeTransactionController(
     ).insert_transactionType(transactionType)
     return new_transactionType
+
+
+@typeTransactionRouter.get("/")
+async def get_transactionType_all():
+    transaction_type = TypeTransactionController().get_all_transactionType()
+    if not transaction_type:
+        raise HTTPException(
+            status_code=404, detail="transactionType not found")
+    return transaction_type

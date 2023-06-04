@@ -9,7 +9,8 @@ class TypeTransactionController():
         self._Base = self.__Session()
 
     def get_all_transactionType(self):
-        pass
+        transaction_type = self._Base.query(TypeTransaction).all()
+        return transaction_type
 
     def get_transactionType(self, name_typo):
         transaction_type = self._Base.query(TypeTransaction).filter(
