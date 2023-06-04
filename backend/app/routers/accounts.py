@@ -10,7 +10,7 @@ accountRouter = APIRouter(prefix="/accounts",
                           responses={status.HTTP_404_NOT_FOUND: {"message": "No encontrado"}})
 
 
-@accountRouter.post("/")
+@accountRouter.post("/", status_code=201)
 async def create_account(account: AccountCreate):
     user = UserController().get_user(account.id_user)
     print(user)

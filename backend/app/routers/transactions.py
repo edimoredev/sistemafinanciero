@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from app.controller.transaction_controller import TransactionController
+from app.controller.account_controller import AccountController
 from app.schemas.transaction import TransactionCreate
 
 
@@ -8,14 +9,16 @@ transactionRouter = APIRouter(prefix="/transactions",
                               responses={status.HTTP_404_NOT_FOUND: {"message": "No encontrado"}})
 
 
-@transactionRouter.post("/")
+@transactionRouter.post("/", status_code=201)
 async def create_transactionType(transaction: TransactionCreate):
-    transaction_type = TypeTransactionController().get_transactionType(
-        transaction.name_typeTransactions)
-    if transaction_type:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="El tipo de transacción ya existe")
+    new_transaction = TransactionController(
+    ).insert_transaction(transaction)
+    return new_transaction
 
-    new_transactionType = TypeTransactionController(
-    ).insert_transactionType(transactionType)
-    return new_transactionType
+@transactionRouter.get("/")
+async def get_transactionType_all():
+    transaction = TransactionController().get_all_transaction()
+    if not transaction:
+        raise HTTPException(
+            status_code=404, detail="transaction not found")
+    return transaction

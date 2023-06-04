@@ -11,7 +11,7 @@ class Transaction(_database.Base):
         _database (_type_): _description_
     """
     __tablename__ = 'transactions'
-    id_cuenta = _sql.Column(_sql.BigInteger, primary_key=True)
+    id_transaction = _sql.Column(_sql.BigInteger, primary_key=True)
 
     # _Relationship to the table of accounts
     id_account = _sql.Column(_sql.BigInteger, _sql.ForeignKey(

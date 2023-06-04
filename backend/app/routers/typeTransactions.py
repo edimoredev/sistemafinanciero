@@ -9,7 +9,7 @@ typeTransactionRouter = APIRouter(prefix="/typeTransactions",
                                   responses={status.HTTP_404_NOT_FOUND: {"message": "No encontrado"}})
 
 
-@typeTransactionRouter.post("/")
+@typeTransactionRouter.post("/", status_code=201)
 async def create_transactionType(transactionType: TypeTransactionCreate):
     transaction_type = TypeTransactionController().get_transactionType(
         transactionType.name_typeTransactions)
