@@ -11,7 +11,12 @@
 
 - Version python: Python 3.10.6
 - Entorno virtual: virtualenv 20.16.3
-- Nombre del Proyecto: votaciones
-  - fast api
+- Nombre del Proyecto: sistemafinanciero
+  - fast api 0.96.0
   - psycopg2 2.9.6 --> base de datos postgres
   - Archivo requirements.txt: Contenido de las librerias utilizadas
+
+apis:
+http://127.0.0.1:8000/docs
+
+image.png
