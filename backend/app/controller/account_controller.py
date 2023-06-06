@@ -53,7 +53,8 @@ class AccountController():
     def insert_account(self, account, numCuenta):
         new_account = Account(id_account=numCuenta,
                               id_user=account.id_user,
-                              name_surname=account.name_surname.upper())
+                              name_surname=account.name_surname.upper(),
+                              balance=account.balance)
 
         self._Base.add(new_account)
         self._Base.commit()

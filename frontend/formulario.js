@@ -85,41 +85,51 @@ function sendTransaction() {
   document.getElementsByClassName("formTransaccion")
  );
  if (Validacion == true) {
-  var transaccion = new FormData();
-  transaccion.append(
-   "id_account",
-   document.getElementById("num_cuenta_transaction").value
-  );
-  transaccion.append(
-   "id_type_transactions",
-   document.getElementById("select_tipoTransaccion").value
-  );
+  let valorTransaccion = document.getElementById("monto").value;
+  console.log(valorTransaccion);
+  let idTipoTransaccion = document.getElementById(
+   "select_tipoTransaccion"
+  ).value;
+  if (valorTransaccion >= 1000) {
+   var transaccion = new FormData();
+   transaccion.append(
+    "id_account",
+    document.getElementById("num_cuenta_transaction").value
+   );
+   transaccion.append(
+    "id_type_transactions",
+    document.getElementById("select_tipoTransaccion").value
+   );
 
-  transaccion.append("amount", document.getElementById("monto").value);
-  var trasactionCompletos = Object.fromEntries(transaccion.entries());
+   transaccion.append("amount", document.getElementById("monto").value);
+   var trasactionCompletos = Object.fromEntries(transaccion.entries());
 
-  update(trasactionCompletos);
-  listaTransaction = {};
-  listaTransaction.trasactionCompletos = JSON.stringify(trasactionCompletos);
+   update(trasactionCompletos);
+   listaTransaction = {};
+   listaTransaction.trasactionCompletos = JSON.stringify(trasactionCompletos);
 
-  //console.log(trasactionCompletos);
-  fetch("http://127.0.0.1:8000/transactions/", {
-   method: "POST",
-   body: listaTransaction.trasactionCompletos,
-   headers: { "Content-Type": "application/json" },
-  })
-   .then(function (response) {
-    if (response.ok) {
-     true;
-    } else {
+   //console.log(trasactionCompletos);
+   fetch("http://127.0.0.1:8000/transactions/", {
+    method: "POST",
+    body: listaTransaction.trasactionCompletos,
+    headers: { "Content-Type": "application/json" },
+   })
+    .then(function (response) {
+     if (response.ok) {
+      true;
+     } else {
+      document.getElementById("transaccionmsj").innerHTML =
+       "Error en la solicitud:";
+     }
+    })
+    .catch(function (error) {
      document.getElementById("transaccionmsj").innerHTML =
       "Error en la solicitud:";
-    }
-   })
-   .catch(function (error) {
-    document.getElementById("transaccionmsj").innerHTML =
-     "Error en la solicitud:";
-   });
+    });
+  } else {
+   document.getElementById("transaccionmsj").innerHTML =
+    "¡Transacción!, El monto a retirar o a consignar debe ser mayor a 1000";
+  }
  }
 }
 
@@ -180,13 +190,16 @@ $(document).ready(function () {
  $("#consultar_saldo").on("click", function () {
   document.getElementById("div-consultar-cuenta").style.display = "";
   document.getElementById("div-transaccion").style.display = "none";
+  document.getElementById("cuenta").innerHTML = "";
+  document.getElementById("user").innerHTML = "";
   consulData();
  });
 
  $("#transaccion").on("click", function () {
   document.getElementById("div-consultar-cuenta").style.display = "None";
   document.getElementById("div-transaccion").style.display = "";
-  document.getElementById("fila").remove();
+  document.getElementById("cuenta").innerHTML = "";
+  document.getElementById("user").innerHTML = "";
  });
 
  function consulData() {
@@ -215,7 +228,7 @@ $(document).ready(function () {
  function table(data) {
   const table = document.getElementById("accountUsuario");
 
-  table.innerHTML +=
+  table.innerHTML =
    "<tr id='fila'><td>" +
    data.id_account +
    "</td><td>" +
