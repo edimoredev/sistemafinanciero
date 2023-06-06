@@ -1,0 +1,18 @@
+flowchart LR
+
+U(user)
+A(account)
+Tt(TypeTransaction)
+
+TIE{tiene}
+HACE{hace}
+REALIZA{realiza}
+
+
+U ---|1| TIE 
+TIE ---|N| A
+A --- |1| HACE & REALIZA
+REALIZA ---|N|transactions
+HACE ---|N| Tt
+
+

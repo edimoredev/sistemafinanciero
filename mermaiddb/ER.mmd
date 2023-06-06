@@ -1,0 +1,36 @@
+erDiagram
+
+
+users{
+varchar(50) id_card PK
+varcahr name_user
+varchar hash_password
+}
+
+accounts{
+int id_accouts PK
+varchar(50) id_user FK "Ref:users(id_card)"
+varchar(50) name_surname
+int balance
+}
+
+typetransactions{
+int id_typeTransactions PK
+varchar(50) name_typeTransactions
+bool status
+
+}
+
+transactions{
+int id_transaction PK
+int id_account FK "Ref:accounts(id_accouts)"
+int id_type_transactions FK "Ref:typetransactions(id_typeTransactions)"
+int amount
+}
+
+
+
+
+users }o--||accounts : id_card
+accounts }o--|| transactions:id_account
+typetransactions }o--||transactions : id_type_transactions
