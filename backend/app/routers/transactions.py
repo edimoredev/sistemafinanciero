@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from app.controller.transaction_controller import TransactionController
 from app.controller.account_controller import AccountController
-from app.schemas.transaction import TransactionCreate
+from app.schemas.transaction import TransactionCreate, _TransactionBase
 
 
 transactionRouter = APIRouter(prefix="/transactions",
@@ -15,10 +15,24 @@ async def create_transactionType(transaction: TransactionCreate):
     ).insert_transaction(transaction)
     return new_transaction
 
-@transactionRouter.get("/")
-async def get_transactionType_all():
-    transaction = TransactionController().get_all_transaction()
-    if not transaction:
+# @transactionRouter.get("/")
+# async def get_transactionType_all():
+#     transaction = TransactionController().get_all_transaction()
+#     if not transaction:
+#         raise HTTPException(
+#             status_code=404, detail="transaction not found")
+#     return transaction
+
+@transactionRouter.put("/")
+async def put_transactionType_all(transaction: _TransactionBase ):
+    transaction = TransactionController().put_transactionSaldo(transaction)
+    if transaction == True :
         raise HTTPException(
-            status_code=404, detail="transaction not found")
-    return transaction
+            status_code=200, detail="Se realizo la transacción")
+    else:
+        raise HTTPException(
+            status_code=404, detail="Saldos insuficientes")
+    
+    
+
+        

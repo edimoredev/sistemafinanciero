@@ -20,9 +20,9 @@ class Transaction(_database.Base):
         'Account', backref=_orm.backref('transactions', lazy=True))
 
     # _Relationship to the table of TypeTransaction
-    id_typeTransactions = _sql.Column(_sql.BigInteger, _sql.ForeignKey(
+    id_type_transactions = _sql.Column(_sql.BigInteger, _sql.ForeignKey(
         "typetransactions.id_typeTransactions", ondelete="CASCADE"), nullable=False)
-    typeTransaction = _orm.relationship(
+    type_transaction = _orm.relationship(
         'TypeTransaction', backref=_orm.backref('transactions', lazy=True))
 
     amount = _sql.Column(_sql.Numeric(20, 2), nullable=False)

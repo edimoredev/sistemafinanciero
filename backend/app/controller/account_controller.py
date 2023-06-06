@@ -1,5 +1,6 @@
 import app.adapters.database as _database
 from app.models.account import Account
+from app.models.user import User
 
 
 class AccountController():
@@ -19,12 +20,16 @@ class AccountController():
         self._Base.close()
         return account
 
-    def insert_account(self, account, numCuenta):
-        print(account.id_user)
+    def get_account_user(self, name_user):
+        accountUser = self._Base.query(Account).join(
+            User).filter(User.name_user == name_user).first()
+        self._Base.close()
+        return accountUser
 
+    def insert_account(self, account, numCuenta):
         new_account = Account(id_account=numCuenta,
                               id_user=account.id_user,
-                              name_surname=account.name_surname)
+                              name_surname=account.name_surname.upper())
 
         self._Base.add(new_account)
         self._Base.commit()

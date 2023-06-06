@@ -19,3 +19,9 @@ class Accoun(AccountBase):
 
     class Config:
         orm_mode = True
+
+
+class UserAccount(_pydantic.BaseModel):
+    id_card: str
+    name_user: str
+    account: AccountBase

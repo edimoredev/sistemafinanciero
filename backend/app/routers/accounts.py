@@ -13,7 +13,6 @@ accountRouter = APIRouter(prefix="/accounts",
 @accountRouter.post("/", status_code=201)
 async def create_account(account: AccountCreate):
     user = UserController().get_user(account.id_user)
-    print(user)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail="El usuario no existe, para crear la cuenta, debe crear un usuario")
@@ -30,9 +29,17 @@ async def create_account(account: AccountCreate):
     return new_account
 
 
-@accountRouter.get("/")
-async def get_account_all():
-    accounts = AccountController().get_all_account()
+# @accountRouter.get("/")
+# async def get_account_all():
+#     accounts = AccountController().get_all_account()
+#     if not accounts:
+#         raise HTTPException(
+#             status_code=404, detail="Accounts not found")
+#     return accounts
+
+@accountRouter.get("/{user_name}")
+async def get_account_all(user_name: str):
+    accounts = AccountController().get_account_user(user_name.upper())
     if not accounts:
         raise HTTPException(
             status_code=404, detail="Accounts not found")

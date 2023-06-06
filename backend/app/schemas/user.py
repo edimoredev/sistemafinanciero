@@ -5,8 +5,11 @@ class _UserBase(_pydantic.BaseModel):
     id_card: str
     name_user: str
 
+    class Config:
+        orm_mode = True
 
-class UserCreate(_UserBase):
+
+class UserCreateDb(_UserBase):
     hash_password: str
 
     class Config:

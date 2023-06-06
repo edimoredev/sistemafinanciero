@@ -4,7 +4,7 @@ import datetime as _dt
 
 class _TransactionBase(_pydantic.BaseModel):
     id_account: int
-    id_typeTransactions: int
+    id_type_transactions: int
     amount: int
 
 
