@@ -18,8 +18,8 @@
 
 Nota:
 
-El proyecto se crea con una base de datos POSTGRES, nombre de la base de datos "financiera".
-Se crea una carpeta con nombre mermaiddb, la cual contiene el MER y el DER, de la base de datos
+- El proyecto se crea con una base de datos POSTGRES, nombre de la base de datos "financiera".
+- Se crea una carpeta con nombre mermaiddb, la cual contiene el MER y el DER, de la base de datos
 
 apis:
 http://127.0.0.1:8000/docs
@@ -34,7 +34,6 @@ aplicación Frontend
 
 ![image](https://github.com/edimoredev/sistemafinanciero/assets/125479887/52ad4fcb-f126-4e7d-b881-efd37d09812a)
 
-
 Saldos y cuentas
 
 ![image](https://github.com/edimoredev/sistemafinanciero/assets/125479887/ba1d7463-9d51-472e-8a12-ac4dfc8a1b76)
@@ -42,7 +41,3 @@ Saldos y cuentas
 Transacciones
 
 ![image](https://github.com/edimoredev/sistemafinanciero/assets/125479887/8a4abf14-f322-4ffb-a213-4e86671434bd)
-
-
-
-
