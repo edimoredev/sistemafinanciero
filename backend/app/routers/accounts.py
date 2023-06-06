@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from app.controller.account_controller import AccountController
 from app.controller.user_controller import UserController
 from app.schemas.account import AccountCreate
+from app.schemas.transaction import _TransactionBase
 import random as _random
 
 
@@ -44,3 +45,14 @@ async def get_account_all(user_name: str):
         raise HTTPException(
             status_code=404, detail="Accounts not found")
     return accounts
+
+
+@accountRouter.put("/")
+async def put_account_balance(transaction: _TransactionBase):
+    account = AccountController().put_account_balance(transaction)
+    if account == True:
+        raise HTTPException(
+            status_code=200, detail="Se realizo la transacción")
+    else:
+        raise HTTPException(
+            status_code=404, detail="Saldos insuficientes")

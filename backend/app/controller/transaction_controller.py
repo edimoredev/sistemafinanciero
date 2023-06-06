@@ -14,30 +14,6 @@ class TransactionController():
         self._Base.close()
         return transaction
 
-    def put_transactionSaldo(self, transaction):
-        if transaction.id_type_transactions == 2:
-            saldo = self._Base.query(Account).filter(
-                Account.id_account == transaction.id_account).first()
-            suma = saldo.balance + transaction.amount
-            self._Base.query(Account).filter(
-                Account.id_account == transaction.id_account).update({Account.balance: suma})
-            self._Base.commit()
-            self._Base.close()
-            return True
-        else:
-            saldo = self._Base.query(Account).filter(
-                Account.id_account == transaction.id_account).first()
-
-            if saldo.balance >= transaction.amount:
-                resta = saldo.balance - transaction.amount
-                self._Base.query(Account).filter(
-                    Account.id_account == transaction.id_account).update({Account.balance: resta})
-                self._Base.commit()
-                self._Base.close()
-                return True
-            else:
-                return False
-
     def insert_transaction(self, transaction):
         new_transaction = Transaction(id_account=transaction.id_account,
                                       id_type_transactions=transaction.id_type_transactions,

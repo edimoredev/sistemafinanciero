@@ -1,4 +1,5 @@
 import pydantic as _pydantic
+from typing import Optional
 
 
 class AccountBase(_pydantic.BaseModel):
@@ -11,7 +12,7 @@ class AccountCreate(AccountBase):
     pass
 
 
-class Accoun(AccountBase):
+class Account(AccountBase):
     id_account: int
     id_user: str
     name_surname: str

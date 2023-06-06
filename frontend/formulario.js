@@ -126,7 +126,7 @@ function sendTransaction() {
 function update(datos) {
  listaTransaction = {};
  listaTransaction.datos = JSON.stringify(datos);
- fetch("http://127.0.0.1:8000/transactions/", {
+ fetch("http://127.0.0.1:8000/accounts/", {
   method: "PUT",
   body: listaTransaction.datos,
   headers: { "Content-Type": "application/json" },
@@ -134,7 +134,7 @@ function update(datos) {
   .then(function (response) {
    if (response.ok) {
     document.getElementById("transaccionmsj").innerHTML =
-     "¡Transaccion!, Se realizo la transacción";
+     "¡Transaccion!, Se realizo la transacción satisfactoriamente";
    } else {
     document.getElementById("transaccionmsj").innerHTML =
      "Saldos insuficientes";
@@ -186,6 +186,7 @@ $(document).ready(function () {
  $("#transaccion").on("click", function () {
   document.getElementById("div-consultar-cuenta").style.display = "None";
   document.getElementById("div-transaccion").style.display = "";
+  document.getElementById("fila").remove();
  });
 
  function consulData() {
@@ -215,7 +216,7 @@ $(document).ready(function () {
   const table = document.getElementById("accountUsuario");
 
   table.innerHTML +=
-   "<tr><td>" +
+   "<tr id='fila'><td>" +
    data.id_account +
    "</td><td>" +
    data.id_user +

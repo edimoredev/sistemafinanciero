@@ -26,6 +26,30 @@ class AccountController():
         self._Base.close()
         return accountUser
 
+    def put_account_balance(self, account):
+        if account.id_type_transactions == 2:
+            saldo = self._Base.query(Account).filter(
+                Account.id_account == account.id_account).first()
+            suma = saldo.balance + account.amount
+            self._Base.query(Account).filter(
+                Account.id_account == account.id_account).update({Account.balance: suma})
+            self._Base.commit()
+            self._Base.close()
+            return True
+        else:
+            saldo = self._Base.query(Account).filter(
+                Account.id_account == account.id_account).first()
+
+            if saldo.balance >= account.amount:
+                resta = saldo.balance - account.amount
+                self._Base.query(Account).filter(
+                    Account.id_account == account.id_account).update({Account.balance: resta})
+                self._Base.commit()
+                self._Base.close()
+                return True
+            else:
+                return False
+
     def insert_account(self, account, numCuenta):
         new_account = Account(id_account=numCuenta,
                               id_user=account.id_user,
